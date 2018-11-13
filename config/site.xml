@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Configuration>
+	<MVC>
+		<Startup controller="Index" action="index"/>
+	</MVC>
+	<!--引用管理-->
+	<Reference>
+		<!--引用控件 path 文件路径 -->
+		<Control enabled="false" path="/page/control/reference.php" />
+		<!--头引用-->
+		<Head>
+			<link rel="shortcut icon" type="image/x-icon" href="/image/favicon.ico" />
+			<link rel="stylesheet" href="/Style/ZXUN.css" type="text/css" />
+			<script type="text/javascript" src="/Script/ZXUN.js"></script>
+		</Head>
+        <!--布局-->
+        <Layout>
+            <Item type="header" path="page/control/header.php" enabled="false"/>
+            <Item type="page"/>
+            <Item type="footer" path="page/control/footer.php" enabled="false"/>
+        </Layout>
+        <!--统计代码 mode 模式 [Remote:远程,Local:本地,On:所有,Off:关闭]-->
+        <Statistics mode="Remote">
+            <!--统计代码-->
+            <Code></Code>
+        </Statistics>
+        <!--引用模板 path:路径-->
+        <Theme path="/Theme/" default="Default" enabled="true">
+            <!--模板项 key:引用键 name:名称文件路径 desc:描述-->
+            <Item key="Default" name="Default" desc="默认主题" />
+            <Item key="Black" name="Black" desc="黑色主题" />
+            <Item key="Blue" name="Blue" desc="蓝色主题" />
+            <Item key="Red" name="Red" desc="红色主题" />
+        </Theme>
+        <!--分页公共默认设置-->
+        <Paging>
+            <!--设置-->
+            <Setting enabled="true">
+                <!--页面索引 value:默认索引 parameter:索引参数-->
+                <PageIndex value="1" parameter="PageIndex" />
+                <!--显示数量 value:默认数量 parameter:数量参数-->
+                <PageSize value="20" parameter="PageSize" />
+                <!--前置数量 value:默认数量 parameter:数量参数-->
+                <BeforeCount value="5" parameter="BeforeCount" />
+                <!--后置数量 value:默认数量 parameter:数量参数-->
+                <AfterCount value="5" parameter="AfterCount" />
+            </Setting>
+        </Paging>
+        <!--时间-->
+        <DateTime>
+            <!--时间格式 如:yy/MM/dd 也可以 yy-MM-dd-->
+            <Format>
+                <Item key="SortDate" value="yy-MM-dd" />
+                <Item key="LongDate" value="yyyy-MM-dd" />
+                <Item key="SortTime" value="HH:mm:ss" />
+                <Item key="LongTime" value="HH:mm:ss:fff" />
+            </Format>
+        </DateTime>
+    </Reference>
+	<Layout current="default">
+		<Item name="default">
+			<Theme>
+				<Item name="default"/>
+				<Item name="skyblue"/>
+				<Item name="green"/>
+			</Theme>
+			<Menu>
+				<Item name="中文" attr = "En"/>
+				<Item name="英文" attr = "Ch"/>
+			</Menu>
+			<Tabreport>
+				<Report icon="&#xe901;" name="常用报告">
+					<Item name="趋势分析" src="/flow/trend"/>
+				</Report>
+				<Report icon="&#xe669;" name="网站概况" src="/main/main"></Report>
+				<Report icon="&#xe804;" name="流量分析">
+					<Item name="当前在线" src="/flow/online"/>
+					<Item name="趋势分析" src="/flow/trend"/>
+				</Report>
+				<Report icon="&#xe662;" name="来源分析">
+					<Item name="全部来源" src="/source/"/>
+					<Item name="搜索引擎" src="/source/searchengine/"/>
+					<Item name="搜索词" src="/source/keyword"/>
+					<Item name="外部来路" src="/source/externallink"/>
+				</Report>
+				<Report icon="&#xe626;" name="访问分析">
+					<Item name="受访页面" src="/visit/page"/>
+					<Item name="入口页面" src="/visit/entry"/>
+					<Item name="受访域名" src="/visit/domain"/>
+					<Item name="热点图" src="/visit/hotspot"/>
+					<!--Item name="目录分析" src="/visit/catalog"/-->
+				</Report>
+				<Report icon="&#xe900;" name="转化分析">
+					<Item name="转化概况" src="/transform/index"/>
+					<Item name="转化路径" src="/transform/analysis"/>
+					<!--<Item name="增加路径" src="/transform/add"/>-->
+				</Report>
+				<Report icon="&#xe640;" name="访客分析">
+					<Item name="地域分布" src="/visitor/region"/>
+					<Item name="系统环境"  src="/visitor/platform"/>
+					<Item name="新老访客"  src="/visitor/visitor"/>
+					<Item name="忠诚度"  src="/visitor/loyalty"/>
+					<!--<Item name="访客属性"  src="/visitor/attribute"/>-->
+				</Report>
+			</Tabreport>
+			<Movereport>
+				<Report icon="&#xe804;" name="应用概况" src="/app/main/main">
+				</Report>
+				<Report icon="&#xe804;" name="定制分析">
+					<Item name="定时分析" src="/app/custom/report"/>
+					<Item name="定制报告" src="/app/custom/add"/>
+				</Report>
+				<Report icon="&#xe662;" name="用户分析">
+					<Item name="用户趋势" src="/app/user/trend"/>
+					<Item name="活跃用户" src="/app/user/active"/>
+					<Item name="用户画像" src="/app/user/persona"/>
+					<Item name="地域分布" src="/app/user/area"/>
+					<Item name="终端分析" src="/app/user/terminal"/>
+					<Item name="版本分析" src="/app/user/version"/>
+					<Item name="实时访客" src="/app/user/online"/>
+				</Report>
+				<Report icon="&#xe662;" name="使用行为">
+					<Item name="事件分析" src="/app/action/index"/>
+					<Item name="页面分析" src="/app/action/page"/>
+					<Item name="页面路径" src="/app/action/path"/>
+					<Item name="使用习惯" src="/app/action/habit"/>
+				</Report>
+				<Report icon="&#xe662;" name="渠道分析">
+					<Item name="渠道分析" src="/app/canal/index"/>
+					<Item name="渠道来源细分" src="/app/canal/source"/>
+				</Report>
+				<Report icon="&#xe662;" name="留存分析">
+					<Item name="新用户留存" src="/app/keep/index"/>
+					<Item name="活跃用户留存" src="/app/keep/active"/>
+				</Report>
+				<Report icon="&#xe662;" name="用户管理">
+					<Item name="个体洞察" src="/app/manage/observe"/>
+					<Item name="用户分群" src="/app/manage/group"/>
+				</Report>
+				<Report icon="&#xe662;" name="开发">
+					<Item name="错误报告" src="/app/developer/report"/>
+					<Item name="错误路径" src="/app/developer/path"/>
+					<Item name="信息设置" src="/app/developer/setting"/>
+				</Report>
+				<Report icon="&#xe662;" name="转化分析">
+					<Item name="转化漏斗"/>
+				</Report>
+			</Movereport>
+			<Sitelist>
+				<Report icon="&#xe804;" name="账户管理">
+					<Item name="网站列表" src="/site/index"/>
+					<Item name="账号设置" src="/account/setting"/>
+					<!--Item name="权限账号设置"/-->
+					<!--Item name="邮件订阅设置" src="/subscription/index"/-->
+					<!--Item name="账号绑定管理"/-->
+				</Report>
+				<Report icon="&#xe804;" name="转化设置">
+					<Item name="基本转化设置" src="/transform/setting_page"/>
+				</Report>
+				<Report icon="&#xe662;" name="代码管理">
+					<Item name="代码获取" src = "/site/code"/>
+					<Item name="代码安装检查" src = "/site/codecheck"/>
+				</Report>
+				<!--Report icon="&#xe662;" name="统计规则设置">
+					<Item name="子目录管理" src ="/rule/directory"/>
+					<Item name="排除规则设置" src ="/rule/exclude"/>
+					<Item name="跨域监控" src ="/rule/domain"/>
+					<Item name="URL规则设置" src ="/rule/url"/>
+				</Report-->
+				<Report icon="&#xe662;" name="其他设置">
+					<Item name="统计图标设置" src = "/site/icon"/>
+				</Report>
+			</Sitelist>
+		</Item>
+	</Layout>
+</Configuration>

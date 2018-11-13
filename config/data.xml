@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Configuration>
+
+  <DataBase>
+    <!-- 事件分析 -->
+    <Item name="app_os" type="MySQL" desc="系统信息" connectionString="Data Source=192.168.1.103;Port=3306;Initial Catalog=app_os;User Id = qykj;Password =szQHdB;Connect Timeout=30"/>
+    
+    <!-- 用户表 -->
+    <Item name="user" type="MySQL" desc="账号信息" connectionString="Data Source=192.168.1.103;Port=3306;Initial Catalog=index_account;User Id = qykj;Password =szQHdB;Connect Timeout=30"/>
+  </DataBase>
+
+  <DataTable>
+    <!-- 事件分析 -->
+    <Item name="app_event" desc="事件分析表" status="ok" database="app_os"/>
+    <Item name="app_application" desc="应用程序信息" status="ok" database="app_os"/>
+    <Item name="app_category" desc="应用程序分类" status="ok" database="app_os"/>
+    <Item name="app_route" desc="转化漏斗" status="ok" database="app_os"/>
+    <Item name="app_attribute" desc="渠道" status="ok" database="app_os"/>
+    <!-- 漏斗转化率 -->
+    <Item name="mms_account" desc="帐号信息" status="ok" database="user"/>
+    <Item name="mms_verify" desc="用户验证信息表" status="ok" database="user"/>
+  </DataTable>
+
+  <!--储存过程-->
+  <!--储存过程项 name:存储过程名称 param:存储过程参数及位置排序 desc:储存过程作用描述 status:状态[ok 可用 no 禁用] database:所在数据库-->
+  <StoredProcedure>
+
+  </StoredProcedure>
+</Configuration>
+
+
+
