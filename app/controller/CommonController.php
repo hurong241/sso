@@ -10,6 +10,7 @@ namespace app\controller;
 
 use Predis;
 use Aes;
+use Wechat;
 
 class CommonController extends Controller
 {
@@ -17,6 +18,7 @@ class CommonController extends Controller
     protected $config;
     protected $redis;
     private $userId;
+    protected $token;
 
     public function __construct($controller, $action)
     {
@@ -51,6 +53,7 @@ class CommonController extends Controller
                 $this->redis->expire($token, $redisExpire);
                 setcookie('token', $token, time() + $redisExpire, '/', $this->config['sso_root_domain']);
                 $this->userId = $uid;
+                $this->token=$token;
             }
         }
     }
@@ -83,6 +86,15 @@ class CommonController extends Controller
         } else {
             return 0;
         }
+    }
+
+    private function qrCode()
+    {
+        //需要gd库支持
+        $wechat = new Wechat();
+        $authUrl = $wechat->getAuthorizeUrl($this->userId);
+        include ROOT.'/app/library/phpqrcode.php';
+        \QRcode::png($authUrl);
     }
 
 }

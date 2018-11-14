@@ -31,8 +31,6 @@ class LoginController extends Controller
      */
     public function index()
     {
-        print_r($_SESSION);
-//        $token = isset($_SESSION['token']) ? $_SESSION['token'] : '';
         $token = isset($_COOKIE['token']) ? $_COOKIE['token'] : '';
         $redirect = !empty($_GET['redirect']) ? trim($_GET['redirect']) : '';
         if ($redirect) {

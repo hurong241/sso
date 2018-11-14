@@ -30,15 +30,20 @@ class Wechat
      * @param string $userId 用户id，授权回调后会原样返回
      * @return string
      */
-    public function getAuthorizeUrl($userId, $type = 'pc1')
+    public function getAuthorizeUrl($token, $type = 'oauth2')
     {
+        if(stripos($this->redirectUrl,'?')!==false){
+            $redirectUrl=$this->redirectUrl.'&token='.$token;
+        }else{
+            $redirectUrl=$this->redirectUrl.'?token='.$token;
+        }
         if ($type == 'pc') {
             //https://open.weixin.qq.com/connect/qrconnect?appid=&redirect_uri=&response_type=code&scope=snsapi_login#wechat_redirect
-            //pc浏览器中:扫码
+            //pc浏览器中:扫码,需要开放平台
             $api = 'https://open.weixin.qq.com/connect/qrconnect';
             $param = [
                 'appid' => $this->appId,
-                'redirect_uri' => urlencode($this->redirectUrl),
+                'redirect_uri' => $redirectUrl,
                 'response_type' => 'code',
                 'scope' => 'snsapi_login',
 //                'state' => $userId,
@@ -50,12 +55,11 @@ class Wechat
             $api = 'https://open.weixin.qq.com/connect/oauth2/authorize';
             $param = [
                 'appid' => $this->appId,
-                'redirect_uri' => urlencode($this->redirectUrl),
+                'redirect_uri' => $redirectUrl,//文档上说这里要用urlencode处理，实现加上了一直报:redirect_url域名与后台配置不一致,错误码:10003
                 'response_type' => 'code',
                 'scope' => 'snsapi_userinfo',
-                'state' => $userId,
+                'state' => '',//原样返回，这里弄成空，生成的二维码太细了怕扫不出来
             ];
-            $param['scope'] = 'snsapi_userinfo';
             $url = $api . '?' . http_build_query($param) . '#wechat_redirect';
         }
 
