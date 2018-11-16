@@ -34,7 +34,7 @@ class CommonController extends Controller
      */
     private function _checkAccess()
     {
-        $token = $_COOKIE['token'];
+        $token = !empty($_COOKIE['token'])?$_COOKIE['token']:'';
         if (!$token) {
             $this->_logout('');
         } else {

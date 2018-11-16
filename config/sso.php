@@ -7,7 +7,7 @@
  * Time: 12:10
  */
 return [
-    'redis'=>'tcp://127.0.0.1:6379',
+    'redis'=>'tcp://192.168.1.129:6379',
     'redis_expire'=>86400*2,//redis过期时间：秒,建议设置一天以上,子站点务必设置为一样
     'session_expire'=>3,//redis过期时间：秒,要比redis_expire小一个数量级
     'aes_key'=>'Http://www.yunIndex.com@4806',//aes加密Key

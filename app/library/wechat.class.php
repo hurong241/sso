@@ -32,10 +32,10 @@ class Wechat
      */
     public function getAuthorizeUrl($token, $type = 'oauth2')
     {
-        if(stripos($this->redirectUrl,'?')!==false){
-            $redirectUrl=$this->redirectUrl.'&token='.$token;
-        }else{
-            $redirectUrl=$this->redirectUrl.'?token='.$token;
+        if (stripos($this->redirectUrl, '?') !== false) {
+            $redirectUrl = $this->redirectUrl . '&token=' . $token;
+        } else {
+            $redirectUrl = $this->redirectUrl . '?token=' . $token;
         }
         if ($type == 'pc') {
             //https://open.weixin.qq.com/connect/qrconnect?appid=&redirect_uri=&response_type=code&scope=snsapi_login#wechat_redirect
@@ -49,7 +49,7 @@ class Wechat
 //                'state' => $userId,
             ];
 //            $param['scope'] = 'snsapi_userinfo';//snsapi_login据说要开第三方平台
-            $url = $api . '?' . http_build_query($param).'#wechat_redirect';
+            $url = $api . '?' . http_build_query($param) . '#wechat_redirect';
         } else {
             //微信浏览器中：点击授权按钮
             $api = 'https://open.weixin.qq.com/connect/oauth2/authorize';
@@ -220,12 +220,49 @@ class Wechat
      */
     public function getWechatIps($accessToken)
     {
-        $api = 'https://api.weixin.qq.com/cgi-bin/getcallbackip?access_token=';
+        $api = 'https://api.weixin.qq.com/cgi-bin/getcallbackip';
         $param = [
             'access_token' => $accessToken
         ];
         $result = $this->_getData($api, $param);
 
         return $result['ip_list'];
+    }
+
+
+    /**
+     * 获取所有客服
+     *
+     * @param $accessToken
+     * @return mixed
+     */
+    public function getCustomers($accessToken)
+    {
+        $api = 'https://api.weixin.qq.com/cgi-bin/customservice/getkflist';
+        $param = [
+            'access_token' => $accessToken
+        ];
+        return $this->_getData($api, $param);
+    }
+
+    /**
+     * 客服发送文本消息给用户
+     *
+     * @param $accessToken
+     * @param $openId
+     * @param $content
+     */
+    public function sendTextMessage($accessToken, $openId, $content)
+    {
+        $api = 'https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=' . $accessToken;
+        $data = [
+            'touser' => $openId,
+            'msgtype' => 'text',
+            'text' => [
+                'content' => $content
+            ]
+        ];
+        $data = json_encode($data);
+        curlPost($api, $data);
     }
 }

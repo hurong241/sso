@@ -6,7 +6,6 @@
  * Date: 2018/11/7
  * Time: 11:03
  */
-
 namespace app\controller;
 
 use Predis;
@@ -143,18 +142,11 @@ class LoginController extends Controller
 
     private function _saveCookieAndToken($token)
     {
-//        if (preg_match('/^[0-9a-zA-Z\+\/]{32,128}$/', $token)) {
         $redisExpire = $this->config['redis_expire'];
-        $sessionExpire = $this->config['session_expire'];
         $redis = new Predis\Client($this->config['redis']);
         $sessionId = session_id();
         $redis->setex($token, $redisExpire, $sessionId);
-        //  setcookie('PHPSESSID', $sessionId, time() + $redisExpire, '/', $this->config['sso_root_domain']);
         setcookie('token', $token, time() + $redisExpire, '/', $this->config['sso_root_domain']);
-//        $_SESSION['token'] = $token;
-//        $_SESSION['expire'] = time() + $sessionExpire;
-        // echo $token;exit();
-//        }
     }
 
 

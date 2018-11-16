@@ -34,6 +34,7 @@ class AuthController extends Controller
         //$this->valid();已验证通过了
         $postStr = isset($GLOBALS['HTTP_RAW_POST_DATA']) ? $GLOBALS['HTTP_RAW_POST_DATA'] : file_get_contents("php://input");
         if (!empty($postStr)) {
+            $this->_savePostData($postStr);
             $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
             $msgType = $postObj->MsgType;
             switch ($msgType) {
@@ -150,6 +151,26 @@ class AuthController extends Controller
     {
         //@todo 逻辑
         return false;
+    }
+
+    /**
+     * 保存微信服务器推送的数据，便于分析
+     * @param $data
+     */
+    private function _savePostData($data)
+    {
+        //@todo 这个方法是为了便于在本地测试观察线上数据用，调试没问题了可以删除
+        $file = 'p.txt';
+        $fp = fopen($file, 'a+');
+        $data = "时间:" . date('Y-m-d H:i:s', time()) . "----------------------------↓\r\n\r\n$data\r\n\r\n";
+        $data = iconv('utf-8', 'gbk', $data);
+        fwrite($fp, $data);
+        fclose($fp);
+    }
+
+    public function clear()
+    {
+        file_put_contents('p.txt', '');
     }
 
 }
