@@ -37,6 +37,8 @@ class AuthController extends Controller
             $this->_savePostData($postStr);
             $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
             $msgType = $postObj->MsgType;
+            $defaultContentStr = "感谢关注,官方网站<a href='http://www.yunindex.com'>www.yunindex.com</a>";
+
             switch ($msgType) {
                 case 'text'://文本消息
                     $contentStr = "感谢关注,业务开发中";
@@ -46,18 +48,18 @@ class AuthController extends Controller
                     $event = $postObj->Event;
                     switch ($event) {
                         case 'subscribe'://关注
-                            $contentStr = "感谢关注!";
-                            $this->_textMessage($postObj, $contentStr);
+                            $this->_textMessage($postObj, $defaultContentStr);
                             break;
                         case 'unsubscribe'://取消关注
+                            $content='欢迎再来';
+                            $this->_textMessage($postObj, $content);
                             break;
                         default:
                             break;
                     }
                     break;
                 default:
-                    $contentStr = "感谢关注";
-                    $this->_textMessage($postObj, $contentStr);
+                    $this->_textMessage($postObj, $defaultContentStr);
                     break;
             }
         } else {

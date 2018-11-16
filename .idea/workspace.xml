@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="f9d1996b-10e3-4761-94fd-64ac485eb304" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/common/function.php" afterPath="$PROJECT_DIR$/app/common/function.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controller/AuthController.php" afterPath="$PROJECT_DIR$/app/controller/AuthController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controller/IndexController.php" afterPath="$PROJECT_DIR$/app/controller/IndexController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/library/wechat.class.php" afterPath="$PROJECT_DIR$/app/library/wechat.class.php" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,11 +27,11 @@
       <file leaf-file-name="AuthController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controller/AuthController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="521">
-              <caret line="160" column="5" selection-start-line="160" selection-start-column="5" selection-end-line="160" selection-end-column="5" />
+            <state relative-caret-position="498">
+              <caret line="53" column="44" selection-start-line="53" selection-start-column="44" selection-end-line="53" selection-end-column="44" />
               <folding>
                 <element signature="e#99#110#0#PHP" expanded="true" />
-                <marker date="1542280233356" expanded="true" signature="2240:2499" placeholder="..." />
+                <marker date="1542341555818" expanded="true" signature="2376:2635" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -51,8 +50,8 @@
       <file leaf-file-name="IndexController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controller/IndexController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="534">
-              <caret line="33" column="22" selection-start-line="33" selection-start-column="22" selection-end-line="33" selection-end-column="22" />
+            <state relative-caret-position="606">
+              <caret line="37" column="44" selection-start-line="37" selection-start-column="44" selection-end-line="37" selection-end-column="44" />
               <folding>
                 <element signature="e#6#87#0#PHP" expanded="true" />
               </folding>
@@ -77,10 +76,10 @@
         <option value="$PROJECT_DIR$/app/controller/CommonController.php" />
         <option value="$PROJECT_DIR$/config/sso.php" />
         <option value="$PROJECT_DIR$/p.txt" />
-        <option value="$PROJECT_DIR$/app/controller/AuthController.php" />
         <option value="$PROJECT_DIR$/app/library/wechat.class.php" />
         <option value="$PROJECT_DIR$/app/common/function.php" />
         <option value="$PROJECT_DIR$/app/controller/IndexController.php" />
+        <option value="$PROJECT_DIR$/app/controller/AuthController.php" />
       </list>
     </option>
   </component>
@@ -322,15 +321,15 @@
       <workItem from="1542161713359" duration="19222000" />
       <workItem from="1542254530848" duration="12737000" />
       <workItem from="1542280164839" duration="198000" />
-      <workItem from="1542331538496" duration="4409000" />
+      <workItem from="1542331538496" duration="6148000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40158000" />
+    <option name="totallyTimeSpent" value="41897000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1924" height="1056" extended-state="0" />
+    <frame x="-8" y="-8" width="1924" height="1056" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2607296" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -385,7 +384,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#99#110#0#PHP" expanded="true" />
-            <marker date="1542280233356" expanded="true" signature="2240:2499" placeholder="..." />
+            <marker date="1542341555818" expanded="true" signature="2376:2635" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -430,7 +429,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#99#110#0#PHP" expanded="true" />
-            <marker date="1542280233356" expanded="true" signature="2240:2499" placeholder="..." />
+            <marker date="1542341555818" expanded="true" signature="2376:2635" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -537,17 +536,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controller/AuthController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="521">
-          <caret line="160" column="5" selection-start-line="160" selection-start-column="5" selection-end-line="160" selection-end-column="5" />
-          <folding>
-            <element signature="e#99#110#0#PHP" expanded="true" />
-            <marker date="1542280233356" expanded="true" signature="2240:2499" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/sso.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
@@ -572,10 +560,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/controller/AuthController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="498">
+          <caret line="53" column="44" selection-start-line="53" selection-start-column="44" selection-end-line="53" selection-end-column="44" />
+          <folding>
+            <element signature="e#99#110#0#PHP" expanded="true" />
+            <marker date="1542341555818" expanded="true" signature="2376:2635" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/controller/IndexController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="534">
-          <caret line="33" column="22" selection-start-line="33" selection-start-column="22" selection-end-line="33" selection-end-column="22" />
+        <state relative-caret-position="606">
+          <caret line="37" column="44" selection-start-line="37" selection-start-column="44" selection-end-line="37" selection-end-column="44" />
           <folding>
             <element signature="e#6#87#0#PHP" expanded="true" />
           </folding>

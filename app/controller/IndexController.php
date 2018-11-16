@@ -33,8 +33,9 @@ class IndexController extends CommonController
         echo '超级token:'.$superToken.'<hr/>';
         echo '客服列表:<hr/>';
         print_r($wechat->getCustomers($superToken));
+        echo '<hr/>';
         $content=rand(1,999);
-        echo "发消息给用户,消息内容:$content<br/>";
+        echo "发消息给用户,消息内容:$content<hr/><hr/>";
         //@todo 测试用户
         $openId='ovLdf0YMgJrzOqCCMxP5mFMjTF2k';
         $wechat->sendTextMessage($superToken,$openId,$content);
