@@ -14,6 +14,7 @@ class Wechat
     private $appId;
     private $appSecret;
     private $redirectUrl;//授权后回调地址
+    private $sendUrl;//客服发消息接口
 
     public function __construct()
     {
@@ -21,6 +22,7 @@ class Wechat
         $this->appId = $this->config['appId'];
         $this->appSecret = $this->config['appSecret'];
         $this->redirectUrl = $this->config['redirectUrl'];
+        $this->sendUrl = 'https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=';
     }
 
     /**
@@ -252,18 +254,71 @@ class Wechat
      * @param $openId
      * @param $content
      */
-    public function sendTextMessage($accessToken, $openId, $content)
+    public function customerSendText($accessToken, $openId, $content, $customerAccount)
     {
-        $api = 'https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=' . $accessToken;
+        $api = $this->sendUrl . $accessToken;
         $data = [
             'touser' => $openId,
             'msgtype' => 'text',
             'text' => [
                 'content' => $content
+            ],
+            'customservice' => [
+                'kf_account' => $customerAccount
             ]
         ];
         $data = json_encode($data);
-        send_post($api,$data);
+        send_post($api, $data);
         //curlPost($api, $data);
+    }
+
+    /**
+     * 客服发送图片给用户
+     *
+     * @param $accessToken
+     * @param $openId
+     * @param $mediaId
+     * @param $customerAccount
+     */
+    public function customerSendPic($accessToken, $openId, $mediaId, $customerAccount)
+    {
+        $api = $this->sendUrl . $accessToken;
+        $data = [
+            'touser' => $openId,
+            'msgtype' => 'image',
+            'image' => [
+                'media_id' => $mediaId
+            ],
+            'customservice' => [
+                'kf_account' => $customerAccount
+            ]
+        ];
+        $data = json_encode($data);
+        send_post($api, $data);
+    }
+
+    /**
+     * 客服发送语音给用户
+     *
+     * @param $accessToken
+     * @param $openId
+     * @param $mediaId
+     * @param $customerAccount
+     */
+    public function customerSendVoice($accessToken, $openId, $mediaId, $customerAccount)
+    {
+        $api = $this->sendUrl . $accessToken;
+        $data = [
+            'touser' => $openId,
+            'msgtype' => 'voice',
+            'voice' => [
+                'media_id' => $mediaId
+            ],
+            'customservice' => [
+                'kf_account' => $customerAccount
+            ]
+        ];
+        $data = json_encode($data);
+        send_post($api, $data);
     }
 }
