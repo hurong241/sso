@@ -73,6 +73,7 @@ function isLegalToken($token,$key)
  * 模拟post进行url请求
  * @param string $url
  * @param string $param
+ * @return bool|mixed
  */
 function curlPost($url = '', $param = '') {
     if (empty($url) || empty($param)) {
@@ -91,4 +92,24 @@ function curlPost($url = '', $param = '') {
     curl_close($ch);
 
     return $data;
+}
+
+/**
+ * 发送post请求(timeout单位：秒)
+ * @param string $url 请求地址
+ * @param string $post_data 数组健值对http_build_query后的字符串或json
+ * @return string
+ */
+function send_post($url, $post_data) {
+    $options = array(
+        'http' => array(
+            'method' => 'POST',
+            'header' => 'Content-type:application/x-www-form-urlencoded',
+            'content' => $post_data,
+            'timeout' => 10
+        )
+    );
+    $context = stream_context_create($options);
+    $result = file_get_contents($url, false, $context);
+    return $result;
 }

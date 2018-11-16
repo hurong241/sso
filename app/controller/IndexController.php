@@ -31,7 +31,7 @@ class IndexController extends CommonController
         echo '<hr>';
         $superToken=$wechat->getSuperToken();
         echo '超级token:'.$superToken.'<hr/>';
-        echo '客服列表:<br/>';
+        echo '客服列表:<hr/>';
         print_r($wechat->getCustomers($superToken));
         $content=rand(1,999);
         echo "发消息给用户,消息内容:$content<br/>";

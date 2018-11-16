@@ -263,6 +263,7 @@ class Wechat
             ]
         ];
         $data = json_encode($data);
-        curlPost($api, $data);
+        send_post($api,$data);
+        //curlPost($api, $data);
     }
 }
