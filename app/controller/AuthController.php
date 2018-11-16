@@ -39,7 +39,7 @@ class AuthController extends Controller
             $msgType = $postObj->MsgType;
 
             //@todo 测试用
-            $msgType = 'link';
+//            $msgType = 'link';
 
 
             switch ($msgType) {
