@@ -23,6 +23,7 @@ trait UserTrait
     private $trade;//行业
     private $address;//地址
     private $companyTel;//公司电话
+    private $url;//公司网址
 
     private function _setTel()
     {
@@ -139,5 +140,14 @@ trait UserTrait
             responseError(613, '公司信息->联系电话格式不正确');
         }
         $this->companyTel = $companyTel;
+    }
+
+    private function _setUrl()
+    {
+        $url = !empty($_POST['url']) ? trim($_POST['url']) : '';
+        if (!empty($url) && (!preg_match('/^((https|http)?:\/\/)[^\s]+$/', $url))) {
+            responseError(613, '公司信息->网址格式不正确');
+        }
+        $this->url = $url;
     }
 }

@@ -25,22 +25,27 @@ class IndexController extends CommonController
     public function index()
     {
         print_r($_COOKIE);
+
+        //@todo 测试用户
+        $openId = 'ovLdf0YMgJrzOqCCMxP5mFMjTF2k';
+        $customerAccount = 'kf2001@QHQYKJ';//客服帐号
+        $mediaId='R-h2gnrxsvdfMYO649Ry-AvVlYqluINQW_YQK2cz3G69qWdeNMTg70YgidL3H3zS';
+
+
         echo '<hr>';
         $wechat = new Wechat();
         echo $authUrl = $wechat->getAuthorizeUrl(urlencode($this->token));
         echo '<hr>';
         $superToken = $wechat->getSuperToken();
         echo '超级token:' . $superToken . '<hr/>';
+        echo '用户信息:'.print_r($wechat->getUserInfo($superToken,$openId));
         echo '客服列表:<hr/>';
         print_r($wechat->getCustomers($superToken));
         echo '<hr/>';
         //发消息给用户
         $content = rand(1, 999);
         echo "发消息给用户,消息内容:$content<hr/>";
-        //@todo 测试用户
-        $openId = 'ovLdf0YMgJrzOqCCMxP5mFMjTF2k';
-        $customerAccount = 'kf2001@QHQYKJ';//客服帐号
-        $mediaId='R-h2gnrxsvdfMYO649Ry-AvVlYqluINQW_YQK2cz3G69qWdeNMTg70YgidL3H3zS';
+
         //@todo 以上测试数据
         $wechat->customerSendText($superToken, $openId, $content, $customerAccount);
         $wechat->customerSendPic($superToken,$openId,$mediaId,$customerAccount);

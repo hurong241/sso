@@ -32,16 +32,16 @@ class Wechat
      * @param string $userId 用户id，授权回调后会原样返回
      * @return string
      */
-    public function getAuthorizeUrl($token, $type = 'oauth2')
+    public function getAuthorizeUrl($token, $type = 'oauth')
     {
         if (stripos($this->redirectUrl, '?') !== false) {
             $redirectUrl = $this->redirectUrl . '&token=' . $token;
         } else {
             $redirectUrl = $this->redirectUrl . '?token=' . $token;
         }
-        if ($type == 'pc') {
+        if ($type == 'qrcode') {
             //https://open.weixin.qq.com/connect/qrconnect?appid=&redirect_uri=&response_type=code&scope=snsapi_login#wechat_redirect
-            //pc浏览器中:扫码,需要开放平台
+            //pc浏览器中:扫码,需要开放平台,此种方式可获取unionid
             $api = 'https://open.weixin.qq.com/connect/qrconnect';
             $param = [
                 'appid' => $this->appId,
@@ -53,7 +53,7 @@ class Wechat
 //            $param['scope'] = 'snsapi_userinfo';//snsapi_login据说要开第三方平台
             $url = $api . '?' . http_build_query($param) . '#wechat_redirect';
         } else {
-            //微信浏览器中：点击授权按钮
+            //微信浏览器中：点击授权按钮,只能获得openid不能获得unionid
             $api = 'https://open.weixin.qq.com/connect/oauth2/authorize';
             $param = [
                 'appid' => $this->appId,
@@ -70,7 +70,7 @@ class Wechat
     }
 
     /**
-     * 根据code获得accessToken
+     * 用户点击授权后根据code获得accessToken
      * @param string $code code作为换取access_token的票据，每次用户授权带上的code将不一样，code只能使用一次，5分钟未被使用自动过期。
      *
      * @return array
@@ -120,7 +120,7 @@ class Wechat
     /**
      * 拉取用户信息(需getAuthorizeUrl中scope为 snsapi_userinfo)
      *
-     * @param string $accessToken getAccessToken()中取的的
+     * @param string $userToken getAccessToken()中取的的
      * @param string $openId 用户openid
      * @param string $lang 返回国家地区语言版本，zh_CN 简体，zh_TW 繁体，en 英语
      * @return mixed
@@ -136,12 +136,11 @@ class Wechat
      * privilege    用户特权信息，json 数组，如微信沃卡用户为（chinaunicom）
      * unionid    只有在用户将公众号绑定到微信开放平台帐号后，才会出现该字段。
      */
-    public function getUserInfo($accessToken, $openId, $lang = 'zh_CN')
+    public function getUserInfo($userToken, $openId, $lang = 'zh_CN')
     {
-        //@todo 这里似乎应该是supertoken
         $api = 'https://api.weixin.qq.com/sns/userinfo';
         $param = [
-            'access_token' => $accessToken,
+            'access_token' => $userToken,
             'openid' => $openId,
             'lang' => $lang
         ];
@@ -209,6 +208,9 @@ class Wechat
     {
         $url = $api . '?' . http_build_query($param);
         $result = json_decode(file_get_contents($url), true);
+        if (isset($result['errcode'])&&($result['errcode'] != 0)) {
+            die('错误:'.$result['errmsg']);
+        }
 
         return $result;
     }

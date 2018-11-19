@@ -29,14 +29,15 @@ class UserController extends CommonController
         }
 
         $this->_setNickName();
-        $this->_setName();
-        $this->_setEmail();
-        $this->_setTel();
-        $this->_setCompany();
-        $this->_setPosition();
-        $this->_setTrade();
-        $this->_setAddress();
-        $this->_setCompanyTel();
+//        $this->_setName();
+//        $this->_setEmail();
+//        $this->_setTel();
+//        $this->_setCompany();
+//        $this->_setPosition();
+//        $this->_setTrade();
+//        $this->_setAddress();
+//        $this->_setCompanyTel();
+        echo $this->nickName;
         //@todo
 
     }
